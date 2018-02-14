@@ -60,6 +60,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void removeActivityUpdatesButtonHandler() {
+        Task<Void> task = activityRecognitionClient.removeActivityUpdates(
+                getActivityDetectionPendingIntent());
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                Toast.makeText(context,
+                        getString(R.string.activity_updates_removed),
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Failed to enable activity recognition.");
+                Toast.makeText(context, getString(R.string.activity_updates_not_removed),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     /**
      * Gets a PendingIntent to be sent for each activity detection.
      */
@@ -67,5 +90,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DetectedActivitiesIntentService.class);
 
         return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    @Override
+    protected void onStop() {
+        removeActivityUpdatesButtonHandler();
+        super.onStop();
     }
 }

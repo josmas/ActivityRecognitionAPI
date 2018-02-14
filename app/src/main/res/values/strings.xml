@@ -4,6 +4,8 @@
     <string name="request_activity_updates">Request updates</string>
     <string name="activity_updates_enabled">Activity updates enabled</string>
     <string name="activity_updates_not_enabled">Failed to enable activity updates</string>
+    <string name="activity_updates_removed">Activity updates removed</string>
+    <string name="activity_updates_not_removed">Failed to remove activity updates</string>
 
     <!-- Activity detection strings -->
     <string name="in_vehicle">In a vehicle</string>
