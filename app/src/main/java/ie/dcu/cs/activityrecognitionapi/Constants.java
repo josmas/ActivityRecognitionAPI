@@ -2,6 +2,7 @@ package ie.dcu.cs.activityrecognitionapi;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 
 import com.google.android.gms.location.DetectedActivity;
 
@@ -15,6 +16,9 @@ public class Constants {
      * fastest possible rate.
      */
     static final long DETECTION_INTERVAL_IN_MILLISECONDS = 30 * 1000; // 30 seconds
+    public static final String KEY_CURRENT_ACTIVITY_STATE = "current_activity_state";
+    public static final String IDLE = "IDLE";
+    public static final String ACTIVE = "ACTIVE";
 
     private Constants() {}
 
@@ -40,5 +44,12 @@ public class Constants {
             default:
                 return resources.getString(R.string.unidentifiable_activity, detectedActivityType);
         }
+    }
+
+    public static void setCurrentActivityState(Context context, String state) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(Constants.KEY_CURRENT_ACTIVITY_STATE, state)
+                .apply();
     }
 }

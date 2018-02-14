@@ -9,8 +9,6 @@ import com.google.android.gms.location.DetectedActivity;
 
 import java.util.ArrayList;
 
-import ie.dcu.cs.activityrecognitionapi.Constants;
-
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
@@ -29,13 +27,12 @@ public class DetectedActivitiesIntentService extends IntentService {
         if (intent != null) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
 
-            ArrayList<DetectedActivity> detectedActivities = (ArrayList) result.getProbableActivities();
+            ArrayList<DetectedActivity> detectedActivities = (ArrayList<DetectedActivity>) result.getProbableActivities();
 
-            Log.i(TAG, "================>>>>");
-            for (DetectedActivity da: detectedActivities) {
-                Log.i(TAG, Constants.getActivityString(this, da.getType()) + " :: " + da.getConfidence());
+            if (new TransitionDetector(this).triggerActiveTransition(detectedActivities)) {
+                Log.i(TAG, "We are ACTIVE NOW!!!");
+                //TODO (jos) Create an EMA notification now.
             }
-            Log.i(TAG, "<<<<================");
         }
         else {
             Log.i(TAG, "In the " + TAG + " but intent is null for some reason!!!");
