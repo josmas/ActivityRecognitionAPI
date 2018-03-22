@@ -21,6 +21,9 @@
 
         <service
             android:name=".activity.DetectedActivitiesIntentService"
+            android:exported="false" />
+        <service
+            android:name=".activity.DetectedTransitionIntentService"
             android:exported="false"></service>
     </application>
 

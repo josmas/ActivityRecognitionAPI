@@ -14,6 +14,8 @@ import ie.dcu.cs.activityrecognitionapi.Constants;
  * At the moment we are only interested in transitions from Idle to Active. But that Idle
  * transition is the only starting point allowed, so it has to be stored (in sharedprefs?).
  *
+ *  UPDATE: turns out there is an activity transition API that can be used for Idle <=:=> Active.
+ *  Registering for it in the main class (its own button). This is new in version 12.0.0
  */
 
 public class TransitionDetector {

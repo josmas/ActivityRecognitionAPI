@@ -17,4 +17,5 @@
     <string name="unknown">Unknown activity</string>
     <string name="walking">Walking</string>
     <string name="unidentifiable_activity">Unidentifiable activity: %1$d</string>
+    <string name="request_transition_updates">Request Transition Updates</string>
 </resources>
